@@ -1,5 +1,6 @@
 package com.payment.gateway.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,6 +25,8 @@ public class Teacher {
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
-    List<Course> coursesMade = new ArrayList<>();
+    @EqualsAndHashCode.Exclude
+    @JsonManagedReference
+    private List<Course> coursesMade = new ArrayList<>();
 
 }
