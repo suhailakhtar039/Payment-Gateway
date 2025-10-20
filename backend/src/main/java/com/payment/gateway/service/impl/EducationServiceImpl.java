@@ -8,7 +8,7 @@ import com.payment.gateway.repository.StudentRepository;
 import com.payment.gateway.repository.TeacherRepository;
 import com.payment.gateway.service.EducationService;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -63,7 +63,7 @@ public class EducationServiceImpl implements EducationService {
         studentRepo.save(student);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public List<Student> getStudentByTeacher(int teacherId) {
         List<Course> courses = courseRepo.findByTeacherTeacherId(teacherId);

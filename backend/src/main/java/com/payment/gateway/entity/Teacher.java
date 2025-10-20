@@ -1,6 +1,5 @@
 package com.payment.gateway.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,24 +8,26 @@ import java.util.List;
 
 @Entity
 @Table(name = "teacher")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Teacher {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
+    @ToString.Include
     private Integer teacherId;
 
     private String firstName;
-
     private String lastName;
-
     private String teacherEmailId;
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @JsonManagedReference
     private List<Course> coursesMade = new ArrayList<>();
-
 }
